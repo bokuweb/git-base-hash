@@ -7,9 +7,7 @@ const shownBranches = execSync('git show-branch -a --sha1-name', { encoding: 'ut
 const separatorIndex = shownBranches.findIndex((b) => /^--/.test(b));
 const branches = shownBranches.slice(0, separatorIndex)
   .map((b, i) => {
-    console.log(b, "b")
-    console.log(b.match(/\[(.+)\]/), "a")
-    const name = b.match(/\[(.+)\]/)[1];
+    const name = b.replace(/\].+/, '').match(/\[(.+)/)[1];
     return {
       order: i,
       name,
