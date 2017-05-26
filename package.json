@@ -1,0 +1,11 @@
+{
+  "name": "git-base-hash",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/bokuweb/git-base-hash.git",
+  "author": "bokuweb <bokuweb12@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "shell-quote": "^1.6.1"
+  }
+}
