@@ -5,7 +5,7 @@
   "repository": "https://github.com/bokuweb/git-base-hash.git",
   "author": "bokuweb <bokuweb12@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "shell-quote": "^1.6.1"
+  "bin": {
+    "git-base-hash": "index.js"
   }
 }
