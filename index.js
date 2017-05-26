@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-const { exec } = require('child_process');
-const { quote } = require('shell-quote');
+const { execSync } = require('child_process');
 
 const target = process.argv[2];
 
@@ -10,16 +9,11 @@ if (!target) {
   process.exit(1);
 }
 
-const promisedExec = (commands) => new Promise((resolve, reject) => {
-  const command = quote(commands);
-  exec(command, (err, stdout, stderr) => {
-    if (err) reject({ err, stderr });
-    resolve(stdout);
-  });
-});
+// git branch &> /dev/null | grep \"^\\*\" | cut -b 3-'
 
-promisedExec(['git', 'checkout', target])
-  .then((branch) => {
-    process.stdout.write(branch);
-  });
+const current = execSync('git branch | grep \"^\\*\" | cut -b 3-', { encoding: 'utf8' });
+console.log(current)
+
+// execSync(`git checkout ${current}`);
+
 
