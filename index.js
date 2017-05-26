@@ -31,7 +31,7 @@ const baseShortHash = commits.find(c => {
     return true;
   }).filter(s => !!s).length;
   return length;
-}).match(/\[(.+)\]/)[1];
+}).replace(/\].+/, '').match(/\[(.+)/)[1];
 
 const baseHash = execSync(`git rev-parse ${baseShortHash}`, { encoding: 'utf8' }).replace('\n', '');
 
