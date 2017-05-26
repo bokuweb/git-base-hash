@@ -4,9 +4,11 @@ const { execSync } = require('child_process');
 
 const current = execSync('git branch | grep \"^\\*\" | cut -b 3-', { encoding: 'utf8' });
 const shownBranches = execSync('git show-branch -a --sha1-name', { encoding: 'utf8' }).split(/\n/);
-const separatorIndex = shownBranches.indexOf('--');
+const separatorIndex = shownBranches.findIndex((b) => /^--/.test(b));
 const branches = shownBranches.slice(0, separatorIndex)
   .map((b, i) => {
+    console.log(b, "b")
+    console.log(b.match(/\[(.+)\]/), "a")
     const name = b.match(/\[(.+)\]/)[1];
     return {
       order: i,
