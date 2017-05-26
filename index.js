@@ -3,20 +3,22 @@
 const { exec } = require('child_process');
 const { quote } = require('shell-quote');
 
-if (!process.argv[2]) {
+const target = process.argv[2];
+
+if (!target) {
   console.error('please specify target branch name');
   process.exit(1);
 }
 
 const promisedExec = (commands) => new Promise((resolve, reject) => {
   const command = quote(commands);
-  exec(command, { cwd: projectRoot }, (err, stdout, stderr) => {
+  exec(command, (err, stdout, stderr) => {
     if (err) reject({ err, stderr });
     resolve(stdout);
   });
 });
 
-promisedExec(['git', 'checkout', '-b', process.argv[2]])
+promisedExec(['git', 'checkout', target])
   .then((branch) => {
     process.stdout.write(branch);
   });
