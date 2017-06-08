@@ -6,7 +6,7 @@
   "author": "bokuweb <bokuweb12@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "chmod +x ./index.js && ava spec/index.spec.js --verbose"
+    "test": "chmod +x ./index.js && ava spec/*.spec.js --verbose"
   },
   "bin": {
     "git-base-hash": "index.js"
