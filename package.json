@@ -5,7 +5,13 @@
   "repository": "https://github.com/bokuweb/git-base-hash.git",
   "author": "bokuweb <bokuweb12@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "chmod +x ./index.js && ava spec/index.spec.js --verbose"
+  },
   "bin": {
     "git-base-hash": "index.js"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1"
   }
 }

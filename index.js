@@ -9,7 +9,6 @@ execSync('git show-branch -a --sha1-name | grep "*" | grep "+"', { encoding: 'ut
   .split(/\n/)
   .map(commit => {
     if (!commit) return;
-    console.log(commit)
     return commit.replace(/\].+/, '').match(/\[(.+)/)[1];
   })
   .some(hash => {
@@ -20,11 +19,9 @@ execSync('git show-branch -a --sha1-name | grep "*" | grep "+"', { encoding: 'ut
     } catch (e) {
       // nop
     }
-    console.log(result)
     baseHash = result;
     return !!result;
   });
 
 execSync(`git checkout ${current}`);
-console.log(baseHash)
-process.stdout.write(baseHash);
+process.stdout.write(baseHash.trim());
