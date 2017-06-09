@@ -2,11 +2,12 @@
 
 const { execSync } = require('child_process');
 
-const current = execSync('git branch | grep \"^\\*\" | cut -b 3-', { encoding: 'utf8' });
+const currentName = execSync('git branch | grep \"^\\*\" | cut -b 3-', { encoding: 'utf8' });
 const shownBranches = execSync('git show-branch -a --sha1-name', { encoding: 'utf8' }).split(/\n/);
 const separatorIndex = shownBranches.findIndex((b) => /^--/.test(b));
 const branches = [];
-const currentHash = execSync(`git rev-parse ${current}`, { encoding: 'utf8' }).replace('\n', '');
+const currentHash = execSync(`git rev-parse ${currentName}`, { encoding: 'utf8' }).replace('\n', '');
+const firstParentHashes = execSync('git log --oneline --first-parent', { encoding: 'utf8' }).split('\n').map(log => log.split(' ')[0]);
 
 let currentIndex;
 let baseHash = '';
@@ -38,17 +39,9 @@ shownBranches
   })
   .map(b => b.replace(/\].+/, '').match(/\[(.+)/)[1])
   .some(hash => {
-    let result;
-    try {
-      execSync(`git checkout --force ${hash}`);
-      result = execSync(`git merge-base --fork-point ${current}`, { encoding: 'utf8' });
-    } catch (e) {
-      // nop
-    }
-    baseHash = result;
-    return !!result;
+    if (firstParentHashes.indexOf(hash) === -1) return;
+    baseHash = execSync(`git rev-parse ${hash}`, { encoding: 'utf8' }).replace('\n', '');
+    return true;
   });
-
-execSync(`git checkout ${current}`);
 
 process.stdout.write(baseHash.trim());
