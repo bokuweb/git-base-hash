@@ -2,10 +2,9 @@ import test from 'ava';
 import { execFile, execSync } from 'child_process';
 import process from 'process';
 
-process.chdir('spec/fixtures/fixture0');
+process.chdir('fixtures/0');
 
 test.beforeEach(t => {
-  console.log(execSync('git status');)
   execSync('git checkout topic');
 });
 
