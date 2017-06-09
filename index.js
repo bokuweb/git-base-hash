@@ -38,9 +38,9 @@ shownBranches
   })
   .map(b => b.replace(/\].+/, '').match(/\[(.+)/)[1])
   .some(hash => {
-    execSync(`git checkout ${hash}`);
-    let result;
     try {
+      execSync(`git checkout --force ${hash}`);
+      let result;
       result = execSync(`git merge-base --fork-point ${current}`, { encoding: 'utf8' });
     } catch (e) {
       // nop
