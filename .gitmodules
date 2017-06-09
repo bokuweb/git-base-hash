@@ -1,3 +1,3 @@
 [submodule "fixtures/case0"]
 	path = fixtures/case0
-	url = `pwd`/spec/fixtures/fixture0
+	url = https://github.com/bokuweb/git-base-hash/tree/master/fixtures/case0
