@@ -12,7 +12,8 @@ const firstParentHashes = execSync('git log -n 1000 --oneline --first-parent', {
 let currentIndex;
 let baseHash = '';
 
-shownBranches.slice(0, separatorIndex)
+shownBranches
+  .slice(0, separatorIndex)
   .forEach((b, i) => {
     const name = b.replace(/\].+/, '').match(/\[(.+)/)[1];
     if (!name) return;
@@ -40,12 +41,12 @@ const candidateHashes = shownBranches
   .map(b => b.replace(/\].+/, '').match(/\[(.+)/)[1]);
 
 
-candidateHashes.some(hash => {
-  if (firstParentHashes.indexOf(hash) === -1) return;
-  // baseHash = execSync(`git rev-parse ${hash}`, { encoding: 'utf8' }).replace('\n', '');
-  baseHash = hash;
-  return true;
-});
+candidateHashes
+  .some(hash => {
+    if (firstParentHashes.indexOf(hash) === -1) return;
+    baseHash = hash;
+    return true;
+  });
 
 const parents = execSync('git log -n 1000 --graph --pretty=format:"%h %p"', { encoding: 'utf8' })
   .split('\n')
@@ -54,16 +55,19 @@ const parents = execSync('git log -n 1000 --graph --pretty=format:"%h %p"', { en
       .replace(/\*|\/|\||/g, '')
       .split(' ')
       .filter(hash => !!hash)
-  ));
+  ))
+  .filter(hashes => hashes.length);
 
 const findParentNode = (parentHash) => parents.find(([hash]) => hash === parentHash);
 
+const traverseLog = (candidateHash) => {
+  const [target, ...parentHashes] = findParentNode(candidateHash);
+  for (const h of parentHashes) {
+    if (target === baseHash) return true;
+    return traverseLog(h);
+  }
+}
 
+const target = candidateHashes.find(traverseLog);
 
-candidateHashes.forEach((candidateHash) => {
-  const [target, ...parentHashes] = parents.find(([hash]) => hash === candidateHash);
-  console.log(target)
-  console.log(parentHashes)
-});
-
-// process.stdout.write(baseHash.trim());
+process.stdout.write(execSync(`git rev-parse ${target}`, { encoding: 'utf8' }).replace('\n', ''));
