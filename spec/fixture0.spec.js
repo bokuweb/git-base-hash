@@ -2,7 +2,7 @@ import test from 'ava';
 import { execFile, execSync } from 'child_process';
 import process from 'process';
 
-process.chdir('spec/fixtures/fixture0');
+process.chdir('fixtures/0');
 
 test.beforeEach(t => {
   execSync('git checkout topic');
@@ -37,7 +37,7 @@ test.beforeEach(t => {
 
 test.serial('should get expected hash', async t => {
   const stdout = await new Promise((resolve) => {
-    execFile('../../../index.js', (error, stdout) => {
+    execFile('../../index.js', (error, stdout) => {
       if (error) console.error(error);
       resolve(stdout)
     });
