@@ -5,6 +5,7 @@ import process from 'process';
 process.chdir('spec/fixtures/fixture0');
 
 test.beforeEach(t => {
+  console.log(execSync('git status');)
   execSync('git checkout topic');
 });
 
