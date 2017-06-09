@@ -29,8 +29,6 @@ process.chdir('fixture');
 |/
 * 5e7fab3 - init (23 minutes ago) <bokuweb>
 
-*/
-
 test.serial('should get expected hash', async t => {
   execSync('git checkout topic');
   const stdout = await new Promise((resolve) => {
@@ -42,6 +40,7 @@ test.serial('should get expected hash', async t => {
   t.is(stdout, "dd1233980a2410cc1d25ad776fe77207725bec2d");
 });
 
+*/
 
 /* Test case 1
 

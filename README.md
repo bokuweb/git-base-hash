@@ -1,1 +1,0 @@
-[![Build Status](https://travis-ci.org/bokuweb/git-base-hash.svg?branch=master)](https://travis-ci.org/bokuweb/git-base-hash)

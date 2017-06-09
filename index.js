@@ -25,7 +25,7 @@ const candidateHashes = shownBranches
   .slice(separatorIndex + 1, shownBranches.length - 1)
   .filter(b => {
     const [status, branch] = b.replace(/\].+/, '').split('[');
-    const isCurrent = status[currentIndex] === '*' || status[currentIndex] === '-';
+    const isCurrent = status[currentIndex] === '*'; // || status[currentIndex] === '-';
     if (!isCurrent) return;
     return [...status]
       .map((s, i) => {
@@ -38,8 +38,8 @@ const candidateHashes = shownBranches
       })
       .filter(s => !!s).length;
   })
-  .map(b => b.replace(/\].+/, '').match(/\[(.+)/)[1]);
-
+  .map(b => b.replace(/\].+/, '').match(/\[(.+)/)[1])
+  .filter(hash => currentHash.indexOf(hash));
 
 candidateHashes
   .some(hash => {
