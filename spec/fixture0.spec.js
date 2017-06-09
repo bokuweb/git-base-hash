@@ -2,7 +2,7 @@ import test from 'ava';
 import { execFile, execSync } from 'child_process';
 import process from 'process';
 
-process.chdir('case0');
+process.chdir('fixture');
 
 test.beforeEach(t => {
   execSync('git checkout topic');
