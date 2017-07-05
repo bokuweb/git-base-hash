@@ -2,12 +2,20 @@
 
 const { execSync } = require('child_process');
 
+let _revParseCache = { };
+function revParse(name) {
+  if (!_revParseCache[name]) {
+    _revParseCache[name] = execSync(`git rev-parse ${name}`, { encoding: 'utf8' }).replace('\n', '');
+  }
+  return _revParseCache[name];
+}
+
 const currentName = execSync('git branch | grep \"^\\*\" | cut -b 3-', { encoding: 'utf8' });
 const shownBranches = execSync('git show-branch -a --sha1-name', { encoding: 'utf8' }).split(/\n/);
 const separatorIndex = shownBranches.findIndex((b) => /^--/.test(b));
 const branches = [];
-const currentHash = execSync(`git rev-parse ${currentName}`, { encoding: 'utf8' }).replace('\n', '');
-const firstParentHashes = execSync('git log -n 1000 --oneline --first-parent', { encoding: 'utf8' }).split('\n').map(log => log.split(' ')[0]);
+const currentHash = revParse(currentName);
+const firstParentHashes = execSync('git log -n 1000 --oneline', { encoding: 'utf8' }).split('\n').map(log => log.split(' ')[0]);
 
 let currentIndex;
 let baseHash = '';
@@ -32,7 +40,7 @@ const candidateHashes = shownBranches
         if (i === currentIndex) return;
         if (s === ' ') return;
         const name = branches[i];
-        const hash = execSync(`git rev-parse ${name}`, { encoding: 'utf8' }).replace('\n', '');
+        const hash = revParse(name);
         if (hash === currentHash) return;
         return true;
       })
