@@ -1,6 +1,8 @@
 import test from 'ava';
 import { execFile, execSync } from 'child_process';
 import process from 'process';
+import { detectBaseHash } from '../lib/index';
+import * as path from 'path';
 
 process.chdir('fixture');
 
@@ -51,11 +53,10 @@ process.chdir('fixture');
 
 test.serial('should get expected hash', async t => {
   execSync('git checkout char');
-  const stdout = await new Promise((resolve) => {
-    execFile('../index.js', (error, stdout) => {
-      if (error) console.error(error);
-      resolve(stdout)
-    });
-  });
-  t.is(stdout, "53e1adbcb5d8c35f8b3165b338a49ef77497c35f");
+  t.is(detectBaseHash(path.resolve('.')), "53e1adbcb5d8c35f8b3165b338a49ef77497c35f");
+});
+
+test.serial('should get expected hash with a branch name', async t => {
+  execSync('git checkout char');
+  t.is(detectBaseHash(path.resolve('.'), 'char'), "53e1adbcb5d8c35f8b3165b338a49ef77497c35f");
 });

@@ -1,17 +1,21 @@
 {
   "name": "git-base-hash",
   "version": "0.2.2",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": "https://github.com/bokuweb/git-base-hash.git",
   "author": "bokuweb <bokuweb12@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "chmod +x ./index.js && ava spec/index.spec.js --verbose"
+    "test": "ava spec/index.spec.js --verbose"
   },
   "bin": {
-    "git-base-hash": "index.js"
+    "git-base-hash": "bin.js"
   },
   "devDependencies": {
-    "ava": "^0.19.1"
+    "ava": "^0.21.0"
+  },
+  "dependencies": {
+    "tiny-commit-walker": "^0.1.7",
+    "yargs": "^8.0.2"
   }
 }
