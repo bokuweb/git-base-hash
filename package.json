@@ -1,6 +1,6 @@
 {
   "name": "git-base-hash",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "main": "lib/index.js",
   "repository": "https://github.com/bokuweb/git-base-hash.git",
   "author": "bokuweb <bokuweb12@gmail.com>",
