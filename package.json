@@ -6,13 +6,16 @@
   "author": "bokuweb <bokuweb12@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "ava spec/index.spec.js --verbose"
+    "gen:fixtures": "find spec/fixtures -type f -name *.sh -exec sh {} \\;",
+    "test": "npm run gen:fixtures && ava spec/index.spec.js --verbose"
   },
   "bin": {
     "git-base-hash": "bin.js"
   },
   "devDependencies": {
-    "ava": "^0.21.0"
+    "ava": "^0.21.0",
+    "cpx": "^1.5.0",
+    "rimraf": "^2.6.1"
   },
   "dependencies": {
     "tiny-commit-walker": "^0.1.7",
