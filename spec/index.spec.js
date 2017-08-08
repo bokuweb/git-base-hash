@@ -21,7 +21,6 @@ const specs = glob.sync('fixtures/*').map(spec => {
   return dirs[dirs.length - 1];
 });
 
-
 specs.forEach((spec) => {
 
   if (spec === 'no-commit') {
