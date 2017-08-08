@@ -1,14 +1,15 @@
-# *   a025d14 merge master to feat-x
+#
+# *   merge master to feat-x
 # |\
-# | * bf6dd42 master2 
-# | * 994654e master1
-# * | bf2cb81 x2 <-- expected!!
-# * | 30d6d40 x1
+# | * master2 
+# | * master1
+# * | x2 <-- expected!!
+# * | x1
 # |/
-# * cd8f9f4 first commit
+# * first commit
 
 cd spec
-echo "11"
+rm -rf fixtures/master-to-catch-up-branch
 git init
 git commit --allow-empty -m "first commit"
 git checkout -b feat-x

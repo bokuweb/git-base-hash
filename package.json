@@ -6,7 +6,7 @@
   "author": "bokuweb <bokuweb12@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "gen:fixtures": "find spec/fixtures -type f -name *.sh -exec sh {} \\;",
+    "gen:fixtures": "find spec/builder -type f -name *.sh -exec sh {} \\;",
     "test": "ava spec/index.spec.js --verbose"
   },
   "bin": {
@@ -15,6 +15,7 @@
   "devDependencies": {
     "ava": "^0.21.0",
     "cpx": "^1.5.0",
+    "glob": "^7.1.2",
     "rimraf": "^2.6.1"
   },
   "dependencies": {

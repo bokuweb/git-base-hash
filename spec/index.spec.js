@@ -3,28 +3,31 @@ import { execSync } from 'child_process';
 import process from 'process';
 import { detectBaseHash } from '../lib/index';
 import * as path from 'path';
+import * as glob from 'glob';
 import * as rimraf from 'rimraf';
-import * as cpx from 'cpx';
 
 process.chdir('spec');
 
-const specs = [
-  'master-to-catch-up-branch',
-];
+test.afterEach.always(() => {
+  rimraf.sync(path.resolve(__dirname, '.git'));
+});
 
-specs.map(spec => {
-  cpx.copySync(path.resolve(__dirname, 'fixtures', spec), path.resolve(__dirname, '.git'));
+const copyGitFiles = (name) => {
+  execSync(`cp -r ${path.resolve('fixtures', name)} ${path.resolve('./', '.git')}`);
+};
 
-  test.serial(spec, async t => {
+const specs = glob.sync('fixtures/*').map(spec => {
+  const dirs = spec.split(path.sep);
+  return dirs[dirs.length - 1];
+});
+
+specs.forEach((spec) => {
+  test.serial(spec, t => {
+    copyGitFiles(spec);
     const baseHash = detectBaseHash(__dirname);
-    const expected = execSync('git show-ref --tag', { encoding: "utf8" }).split(' ')[0];
+    console.log('base')
+    console.log(baseHash);
+    const expected = execSync('git rev-parse expected', { encoding: "utf8" }).trim();
     t.is(expected, baseHash);
   });
-})
-
-test.afterEach(() => {
-  // rimraf.sync(path.resolve(__dirname, '.git'));
-})
-
-
-
+});
