@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "gen:fixtures": "find spec/fixtures -type f -name *.sh -exec sh {} \\;",
-    "test": "npm run gen:fixtures && ava spec/index.spec.js --verbose"
+    "test": "ava spec/index.spec.js --verbose"
   },
   "bin": {
     "git-base-hash": "bin.js"
