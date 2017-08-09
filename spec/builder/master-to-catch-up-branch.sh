@@ -12,14 +12,20 @@ cd spec
 rm -rf fixtures/master-to-catch-up-branch
 git init
 git commit --allow-empty -m "first commit"
+sleep 1s
 git checkout -b feat-x
 git commit --allow-empty -m "x1"
+sleep 1s
 git commit --allow-empty -m "x2"
+sleep 1s
 git tag "expected"
 git checkout master
 git commit --allow-empty -m "master1"
+sleep 1s
 git commit --allow-empty -m "master2"
+sleep 1s
 git checkout -b master2x feat-x
 git merge master -m "merge master to feat-x"
+sleep 1s
 mv .git fixtures/master-to-catch-up-branch
 rm -rf .git

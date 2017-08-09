@@ -1,0 +1,9 @@
+0000000000000000000000000000000000000000 4be9f34b89f7514c10fafa0f35ac142a7715f61e bokuweb <bokuweb12@gmail.com> 1502249522 +0900	commit (initial): first commit
+4be9f34b89f7514c10fafa0f35ac142a7715f61e 4be9f34b89f7514c10fafa0f35ac142a7715f61e bokuweb <bokuweb12@gmail.com> 1502249523 +0900	checkout: moving from master to feat-x
+4be9f34b89f7514c10fafa0f35ac142a7715f61e 3b2176d76c66bc3e2b2edbc9d31b4b70917cdcfb bokuweb <bokuweb12@gmail.com> 1502249523 +0900	commit: x1
+3b2176d76c66bc3e2b2edbc9d31b4b70917cdcfb eebb3774c907b895d228800d2cd0f1a2cb8b058d bokuweb <bokuweb12@gmail.com> 1502249524 +0900	commit: x2
+eebb3774c907b895d228800d2cd0f1a2cb8b058d 4be9f34b89f7514c10fafa0f35ac142a7715f61e bokuweb <bokuweb12@gmail.com> 1502249525 +0900	checkout: moving from feat-x to master
+4be9f34b89f7514c10fafa0f35ac142a7715f61e 3c4560ef0840bc5978ea30846198f1a05637affd bokuweb <bokuweb12@gmail.com> 1502249525 +0900	commit: master1
+3c4560ef0840bc5978ea30846198f1a05637affd 370cab80150865dba16150740fe77f5610a4d37f bokuweb <bokuweb12@gmail.com> 1502249526 +0900	commit: master2
+370cab80150865dba16150740fe77f5610a4d37f eebb3774c907b895d228800d2cd0f1a2cb8b058d bokuweb <bokuweb12@gmail.com> 1502249527 +0900	checkout: moving from master to master2x
+eebb3774c907b895d228800d2cd0f1a2cb8b058d ae8f42e21443a95cfd74e7c718b34e6bcdaaa33a bokuweb <bokuweb12@gmail.com> 1502249527 +0900	merge master: Merge made by the 'recursive' strategy.
