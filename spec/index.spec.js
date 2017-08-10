@@ -22,14 +22,12 @@ const specs = glob.sync('fixtures/*').map(spec => {
 });
 
 specs.forEach((spec) => {
-
-  if (spec === 'no-commit') {
-    test.serial(spec, t => {
+  if (spec === 'no-commit' || spec === 'initial-commit' || spec === 'master-two-commits' || spec === 'after-create-new-branch') {
+    return test.serial(spec, t => {
       copyGitFiles(spec);
       const baseHash = detectBaseHash(__dirname);
       t.is(null, baseHash);
     });
-    return;
   }
   test.serial(spec, t => {
     copyGitFiles(spec);
